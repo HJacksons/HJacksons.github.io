@@ -1308,7 +1308,7 @@
       chipsBox.textContent = '';
       pool.slice(0, n).forEach(e => {
         const b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.textContent = e.q;
-        b.addEventListener('click', () => ask(e.q)); chipsBox.appendChild(b);
+        b.addEventListener('click', () => ask(e.q, e)); chipsBox.appendChild(b);
       });
     }
     const down = () => { log.scrollTop = log.scrollHeight; };
@@ -1329,9 +1329,10 @@
         suggest(3); down();
       }), reduce ? 0 : 420);
     }
-    async function ask(q) {
+    async function ask(q, entry) {
       q = q.trim(); if (!q) return;
       bubble('me').p.textContent = q; input.value = '';
+      if (entry) { asked.add(entry.id); hist.push({ role: 'user', content: q }, { role: 'assistant', content: entry.a }); if (hist.length > 8) hist.splice(0, hist.length - 8); answer(entry, entry.a, entry.l); return; }
       if (CONFIG.chatEndpoint && ++sent > 25) { answer(null, 'That is all the questions for this visit. Message me on LinkedIn and we can continue there.', [['LinkedIn', LI]]); return; }
       hist.push({ role: 'user', content: q }); if (hist.length > 8) hist.shift();
       if (CONFIG.chatEndpoint) {
