@@ -1301,7 +1301,7 @@
       });
       return best;
     }
-    const asked = new Set(['hi']); const hist = [];
+    const asked = new Set(['hi']); const hist = []; let sent = 0;
     if (CONFIG.chatEndpoint) { const sub = $('.ask-s'); if (sub) sub.textContent = "An AI assistant that answers from Jackson's CV. It can make mistakes."; }
     function suggest(n) {
       const pool = KB.filter(e => e.q && !asked.has(e.id));
@@ -1332,6 +1332,7 @@
     async function ask(q) {
       q = q.trim(); if (!q) return;
       bubble('me').p.textContent = q; input.value = '';
+      if (CONFIG.chatEndpoint && ++sent > 25) { answer(null, 'That is all the questions for this visit. Message me on LinkedIn and we can continue there.', [['LinkedIn', LI]]); return; }
       hist.push({ role: 'user', content: q }); if (hist.length > 8) hist.shift();
       if (CONFIG.chatEndpoint) {
         const m = bubble('bot'); m.p.innerHTML = '<span class="typing"><i></i><i></i><i></i></span>';
@@ -1339,6 +1340,7 @@
           const ac = new AbortController(), to = setTimeout(() => ac.abort(), 15000);
           const r = await fetch(CONFIG.chatEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: hist }), signal: ac.signal });
           clearTimeout(to);
+          if (r.status === 429) { hist.pop(); reveal(m.p, 'That is a lot of questions in a short time. Please try again in a little while, or message me on LinkedIn.', () => down()); return; }
           const j = await r.json();
           if (j && j.a) { hist.push({ role: 'assistant', content: j.a }); reveal(m.p, String(j.a), () => { suggest(3); down(); }); return; }
         } catch (_) { /* fall back to the saved answers */ }
