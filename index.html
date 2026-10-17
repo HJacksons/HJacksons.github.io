@@ -323,6 +323,12 @@
   .store:hover { transform: translateY(-2px); box-shadow: 0 8px 0 -2px var(--yellow); text-decoration: none; }
   .store.alt { background: #fff; color: var(--ink); border-color: var(--ink); }
   .store.alt:hover { box-shadow: 0 8px 0 -2px var(--yellow); }
+  .press { display: grid; gap: 0.3rem; margin: 1.1rem 0 0; padding: 0.9rem 1.1rem; border: 1px solid var(--line); border-left: 4px solid var(--yellow); border-radius: 10px; background: #fff; color: var(--ink); text-decoration: none; transition: border-color .2s, transform .2s; }
+  .press:hover { border-color: var(--ink); border-left-color: var(--yellow); transform: translateY(-2px); text-decoration: none; }
+  .press-l { font: 500 0.72rem var(--mono); color: var(--grey); text-transform: uppercase; letter-spacing: 0.08em; }
+  .press b { font-size: 1.02rem; line-height: 1.3; }
+  .press-s { font-size: 0.85rem; color: var(--grey); }
+  .press q { font-size: 0.92rem; color: var(--ink); quotes: "\201C" "\201D"; margin-top: 0.2rem; }
   .webnote { margin: 0.9rem 0 0; font-size: 0.85rem; color: var(--grey); }
   .store svg { width: 1.7rem; height: 1.7rem; flex: none; }
   .store span { display: grid; line-height: 1.05; }
@@ -635,6 +641,12 @@
           <h3>Potato plant disease detection with hybrid deep learning</h3>
           <p>A first-author paper in BMC Plant Biology (2025), written with Ayan Chatterjee (NILU) and Raju Shrestha (OsloMet). It combines convolutional and transformer models to classify potato plant diseases from images.</p>
           <p class="muted">The paper is open access and the code is public on GitHub.</p>
+          <a class="press" href="https://agritechinsights.com/index.php/2025/05/18/norwegian-scientists-revolutionize-potato-disease-detection/" target="_blank" rel="noopener">
+            <span class="press-l">In the media</span>
+            <b>Norwegian Scientists Revolutionize Potato Disease Detection</b>
+            <span class="press-s">AgriTech Insights, May 2025</span>
+            <q>This research opens up new avenues for the application of deep learning in agriculture.</q>
+          </a>
           <ul class="links">
             <li><a href="https://doi.org/10.1186/s12870-025-06679-4">Read the paper</a></li>
             <li><a href="https://github.com/HJacksons/potato-efficientViT">View the code</a></li>
@@ -1276,7 +1288,7 @@
       { id: 'cites', q: 'How often is your paper cited?', k: 'citations cited citation scholar cites impact', a: "My BMC Plant Biology paper has been cited by about " + ($('#citeN') ? $('#citeN').textContent : CONFIG.citations) + " papers, counted by OpenAlex. Google Scholar usually shows more. You can step through the citing papers in the Work section.", l: [['Google Scholar', "https://scholar.google.com/citations?user=d9o78PMAAAAJ&hl=en"]] },
       { id: 'sectors', k: 'ngo ngos nonprofit finance financial bank banks institution institutions sector sectors', a: "Earlier in my career I worked with non-profit organisations and financial institutions, besides university and research projects." },
       { id: 'ai', q: 'Chatbots and AI', k: 'chatbot chatbots llm rag langchain conversational avatar speech agent agents ai', a: "I built user-facing chatbots at Again X, an educational chatbot at the University of Oslo, and led a seven-person team that built a multimodal AI avatar at OsloMet. I work with language models, retrieval-augmented generation, LangChain, and speech-to-text and text-to-speech." },
-      { id: 'research', q: 'Your research', k: 'research paper publication published potato plant disease bmc journal deep learning thesis scientific', a: "My paper on detecting potato plant diseases with hybrid deep learning models was published in BMC Plant Biology in 2025. It was my master's thesis work, graded A. The code is public.", l: [['Read the paper', 'https://doi.org/10.1186/s12870-025-06679-4'], ['Code', 'https://github.com/HJacksons/potato-efficientViT']] },
+      { id: 'research', q: 'Your research', k: 'research paper publication published potato plant disease bmc journal deep learning thesis scientific', a: "My paper on detecting potato plant diseases with hybrid deep learning models was published in BMC Plant Biology in 2025. It was also featured in AgriTech Insights in May 2025. It was my master's thesis work, graded A. The code is public.", l: [['Read the paper', 'https://doi.org/10.1186/s12870-025-06679-4'], ['Code', 'https://github.com/HJacksons/potato-efficientViT'], ['AgriTech Insights article', 'https://agritechinsights.com/index.php/2025/05/18/norwegian-scientists-revolutionize-potato-disease-detection/']] },
       { id: 'edu', q: 'Where did you study?', k: 'education study studied degree master masters bachelor school osloMet makerere thesis grade', a: "MSc in Applied Computer and Information Technology, specialising in Applied AI, at OsloMet (2022 to 2024). BSc in Software Engineering at Makerere University, Uganda (2011 to 2015), Second Class Honours, Upper Division." },
       { id: 'skills', q: 'What is your tech stack?', k: 'skills tech stack technologies tools programming code coding frameworks python typescript javascript vue node fastapi flask pytorch tensorflow sql', a: "Frontend and mobile: JavaScript, TypeScript, Vue.js, Cordova. Backend: Node.js, Express, Python, FastAPI, Flask. Data: SQL, MySQL, MongoDB, BigQuery. AI: PyTorch, TensorFlow, LLM apps, RAG, LangChain. Servers and DevOps: Linux, Nginx, Podman, Docker, Git, GitLab CI/CD, GitHub Actions." },
       { id: 'mobile', k: 'mobile ios android iphone ipad cordova apps', a: "I build mobile and web apps. Dilli runs on iOS, Android tablets and the web, and I have used Cordova for cross-platform builds." },
