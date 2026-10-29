@@ -338,6 +338,11 @@
   .press b { font-size: 1.02rem; line-height: 1.3; }
   .press-s { font-size: 0.85rem; color: var(--grey); }
   .press q { font-size: 0.92rem; color: var(--ink); quotes: "\201C" "\201D"; margin-top: 0.2rem; }
+  .mailrow { margin: 1.4rem 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0.7rem; font-size: 1.05rem; }
+  .mailrow button { font: 600 0.95rem var(--font); color: var(--ink); background: none; border: 0; border-bottom: 2px solid var(--yellow); padding: 0.2rem 0; cursor: pointer; }
+  .mailrow button:hover { background: var(--yellow); }
+  .mailrow .mailcopy { border: 1px solid var(--ink); border-radius: 999px; padding: 0.35rem 0.9rem; }
+  .mailrow a { font-weight: 600; word-break: break-all; }
   .webnote { margin: 0.9rem 0 0; font-size: 0.85rem; color: var(--grey); }
   .store svg { width: 1.7rem; height: 1.7rem; flex: none; }
   .store span { display: grid; line-height: 1.05; }
@@ -913,6 +918,7 @@
         <li class="sep" aria-hidden="true"></li>
         <li><button class="btn ghost" type="button" data-cv>Download CV</button></li>
       </ul>
+      <p class="mailrow" id="mailRow" hidden><button type="button" id="mailShow">Show my email address</button></p>
     </div>
   </section>
 </main>
@@ -965,6 +971,21 @@
   const root = document.documentElement;
 
   if (CONFIG.email) {
+    const mr = document.getElementById('mailRow'), ms = document.getElementById('mailShow');
+    if (mr && ms) {
+      mr.hidden = false;
+      ms.addEventListener('click', () => {
+        mr.textContent = '';
+        const a = document.createElement('a'); a.href = 'mailto:' + CONFIG.email; a.textContent = CONFIG.email;
+        const c = document.createElement('button'); c.type = 'button'; c.className = 'mailcopy'; c.textContent = 'Copy';
+        c.addEventListener('click', () => {
+          const done = () => { c.textContent = 'Copied'; setTimeout(() => { c.textContent = 'Copy'; }, 1800); };
+          try { navigator.clipboard.writeText(CONFIG.email).then(done, () => { c.textContent = 'Press Ctrl+C'; }); } catch (_) { c.textContent = 'Select and copy'; }
+        });
+        mr.append(a, c);
+      });
+    }
+
     ['#contactLinks', '#heroLinks'].forEach(sel => {
       const ul = $(sel); if (!ul) return;
       const li = document.createElement('li');
