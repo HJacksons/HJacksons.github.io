@@ -127,6 +127,9 @@
   .top .mark .short { display: none; }
   .top nav { display: flex; align-items: center; gap: clamp(1rem, 2.6vw, 1.8rem); font-weight: 500; font-size: 0.95rem; }
   .top nav a { text-decoration: none; color: var(--grey); }
+  .top nav .term-open { font: 700 0.85rem var(--mono); color: var(--yellow); background: var(--ink); border-radius: 8px; padding: 0.4rem 0.6rem; letter-spacing: -0.02em; }
+  .top nav .term-open:hover { color: var(--ink); background: var(--yellow); }
+  .foot .tip .keys:empty { display: none; }
   .top nav a:hover { color: var(--ink); text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 3px; }
   .top nav button { font: 600 0.88rem var(--font); color: var(--paper); background: var(--ink); border: 0; border-radius: 999px; padding: 0.45rem 1rem; cursor: pointer; }
   .top nav button:hover { background: #2a2e35; }
@@ -666,6 +669,7 @@
     <a href="#work">Work</a>
     <a href="#experience">Experience</a>
     <a href="#contact">Contact</a>
+    <button type="button" class="term-open" data-term title="Open the terminal" aria-label="Open the terminal"><span aria-hidden="true">&gt;_</span></button>
     <button type="button" data-cv title="Download my CV as a PDF">Download CV</button>
   </nav>
 </header>
@@ -1132,7 +1136,7 @@
 
 <footer>
   <div class="wrap song"><a class="song-b" id="songB" href="https://www.youtube.com/watch?v=awzNHuGqoMc" target="_blank" rel="noopener" aria-label="Open my favourite song on YouTube"><span class="song-t" style="background-image:url(https://i.ytimg.com/vi/awzNHuGqoMc/hqdefault.jpg)"><i></i></span><span><small>Off duty</small><b>My favourite song ever</b><em>Opens on YouTube.</em></span></a></div>
-  <div class="wrap foot"><span>© 2026 Jackson Herbert Sinamenye · Oslo, Norway</span><span class="tip" id="palTip"><button type="button" id="palBtn">Jump anywhere</button> with <span class="kbd">/</span> or <span class="kbd" id="palKey">Ctrl K</span> · <button type="button" id="termBtn">Open the terminal</button> with <span class="kbd">`</span></span><span class="vc" id="vc" hidden title="Visits"><i></i><b id="vcN"></b></span></div>
+  <div class="wrap foot"><span>© 2026 Jackson Herbert Sinamenye · Oslo, Norway</span><span class="tip" id="palTip"><button type="button" id="palBtn">Jump anywhere</button><span class="keys"> with <span class="kbd">/</span> or <span class="kbd" id="palKey">Ctrl K</span></span> · <button type="button" id="termBtn" data-term>Open the terminal</button><span class="keys"> or press <span class="kbd">`</span></span></span><span class="vc" id="vc" hidden title="Visits"><i></i><b id="vcN"></b></span></div>
 </footer>
 
 <script>
@@ -1501,7 +1505,7 @@
       { id: 'now', q: 'What do you do now?', k: 'now current currently job role position employer uio working work where', a: "I'm head engineer at the Department of Special Needs Education, University of Oslo, since May 2025. I lead development of Dilli og de magiske ordene and work with researchers and designers on architecture, implementation, testing, deployment and maintenance." },
       { id: 'dilli', q: 'Tell me about Dilli', k: 'dilli app children kindergarten dsl down syndrome intervention', a: "Dilli og de magiske ordene is a language-learning app for kindergarten children with weak language skills, including children with Down syndrome. It is built within the Down Syndrome LanguagePlus project, runs on iOS, Android tablets and the web, and is free to use. The first version came out on 15 February 2026, and a version with AAC (ASK) support followed in October 2026.", l: [['Web app', 'https://app.dilli.uio.no/'], ['App Store', 'https://apps.apple.com/no/app/dilli-og-de-magiske-ordene/id6747114173'], ['Google Play', 'https://play.google.com/store/apps/details?id=no.uio.spell.dslplus&hl=no'], ['dilli.no', 'https://dilli.no']] },
       { id: 'referee', q: 'Who are your referees?', k: 'referee referees reference references recommend recommendation anders lunde joseph makokha supervisor', a: "I have two referees at the University of Oslo: Anders Lunde, senior engineer at the Department of Special Needs Education, and Joseph Maloba Makokha, postdoctoral fellow at the Department of Informatics. Their contact details are on their UiO profiles.", l: [['Anders Lunde', "https://www.uv.uio.no/isp/personer/adm/andelu/index.html"], ['Joseph Makokha', "https://www.mn.uio.no/ifi/english/people/aca/josepmak/index.html"]] },
-      { id: 'fun', q: 'Is there anything fun here?', k: 'fun game games play easter egg terminal console secret hidden quiz leaf', a: "Yes. Try Spot the disease in my work section, with real leaf photos from my paper. Defend the goal in the Half time section. On a computer, press the backtick key (`) to open a terminal, or press / to jump anywhere. Some commands are hidden." },
+      { id: 'fun', q: 'Is there anything fun here?', k: 'fun game games play easter egg terminal console secret hidden quiz leaf', a: "Yes. Try Spot the disease in my work section, with real leaf photos from my paper. Defend the goal in the Half time section. Click the >_ button at the top of the page (or Open the terminal at the bottom) to use my developer terminal, or press / to jump anywhere. Some commands are hidden." },
       { id: 'now', q: 'What are you working on now?', k: 'now currently current working latest new news next release dilli 2027 busy', a: "Right now I'm building the next release of Dilli og de magiske ordene, due on 15 February 2027. The October 2026 version added AAC (ASK) support. I'm also open to the right opportunity, so feel free to get in touch." },
       { id: 'aiuse', q: 'How do you use AI at work?', k: 'claude claude code terminal agent codex productivity copilot use using replace replacement vibe', a: "I use Claude, Claude Code and Codex to speed up routine work: drafts, boilerplate, tests, refactoring and documentation. Claude Code lets me work with AI directly in the terminal and codebase. I keep architecture, design choices and security for myself, and I read and test everything the tool writes." },
       { id: 'cites', q: 'How often is your paper cited?', k: 'citations cited citation scholar cites impact', a: "My BMC Plant Biology paper has been cited by about " + ($('#citeN') ? $('#citeN').textContent : CONFIG.citations) + " papers, counted by OpenAlex. Google Scholar usually shows more. You can step through the citing papers in the Work section.", l: [['Google Scholar', "https://scholar.google.com/citations?user=d9o78PMAAAAJ&hl=en"]] },
@@ -2373,7 +2377,7 @@
       else if (e.key === 'Tab') { e.preventDefault(); const v = inp.value.trim().toLowerCase(); const m = Object.keys(C).filter(k => k.startsWith(v)); if (m.length === 1) inp.value = m[0] + ' '; else if (m.length > 1 && v) out(m.join('  '), 'g'); }
     });
     $('#termX').addEventListener('click', close);
-    const tb = $('#termBtn'); if (tb) tb.addEventListener('click', open);
+    document.querySelectorAll('[data-term]').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); open(); }));
     addEventListener('keydown', e => {
       const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName || '') || e.target.isContentEditable;
       if ((e.key === '`' || e.code === 'Backquote') && !typing && !e.metaKey && !e.ctrlKey) { e.preventDefault(); term.hidden ? open() : close(); }
@@ -2472,7 +2476,7 @@
       else if (e.key === '/' && !typing && pal.hidden) { e.preventDefault(); show(); }
     });
     const b = $('#palBtn'); if (b) b.addEventListener('click', show);
-    if (!matchMedia('(hover: hover) and (pointer: fine)').matches) { const tip = $('#palTip'); if (tip) tip.hidden = true; }
+    if (!matchMedia('(hover: hover) and (pointer: fine)').matches) document.querySelectorAll('#palTip .keys').forEach(k => k.remove());
   }
 
   // Easter egg: type "arsenal" (or "goal") anywhere
