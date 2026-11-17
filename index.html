@@ -425,11 +425,22 @@
   /* Typed name in the header */
   .top .mark .caret { display: inline-block; width: 2px; height: 1.05em; margin-left: 2px; background: var(--ink); vertical-align: -0.18em; animation: caret 1s steps(1) infinite; }
   @keyframes caret { 50% { opacity: 0; } }
+  /* With AI band (inside How I work) */
+  .ai-band { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(1.5rem, 4vw, 3.5rem); margin-top: clamp(2.5rem, 5vw, 4rem); padding: clamp(1.4rem, 3.5vw, 2.6rem); background: var(--panel); border-radius: 12px; border-left: 6px solid var(--yellow); scroll-margin-top: 5rem; }
+  .ai-band h3 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); line-height: 1.2; letter-spacing: -0.02em; margin: 0.8rem 0 1rem; max-width: 26ch; }
+  .ai-band .areas { margin-bottom: 1.1rem; }
+  .ai-band p { margin: 0; max-width: 58ch; }
+  .ai-rules { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.1rem; align-content: center; }
+  .ai-rules li { padding-top: 0.9rem; border-top: 1.5px solid var(--ink); font-size: 0.95rem; line-height: 1.55; color: var(--grey); }
+  .ai-rules b { display: block; color: var(--ink); font-weight: 700; margin-bottom: 0.2rem; }
+  @media (max-width: 860px) { .ai-band { grid-template-columns: 1fr; } }
   /* Now line (hero) */
   .now { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.6rem; margin: 1.2rem 0 0; font-size: 0.9rem; color: var(--grey); }
   .now b { color: var(--ink); font-weight: 600; }
   .now .pulse { width: 0.6rem; height: 0.6rem; border-radius: 50%; background: #1DB954; box-shadow: 0 0 0 0 rgba(29,185,84,0.5); animation: pulse 2.2s infinite; flex: none; }
-  .now .sep { color: var(--line); }
+  .now { flex-wrap: nowrap; align-items: baseline; display: grid; grid-template-columns: 0.6rem minmax(0, 1fr); column-gap: 0.6rem; row-gap: 0.15rem; }
+  .now .pulse { align-self: start; margin-top: 0.4em; }
+  .now .now-t { grid-column: 2; }
   .now time { font-family: var(--mono); color: var(--ink); }
   @keyframes pulse { 70% { box-shadow: 0 0 0 0.55rem rgba(29,185,84,0); } 100% { box-shadow: 0 0 0 0 rgba(29,185,84,0); } }
   /* Numbers band */
@@ -474,10 +485,10 @@
   .lg-badge { position: absolute; left: 0.7rem; top: 0.7rem; font: 600 0.8rem var(--font); background: var(--ink); color: #fff; border-radius: 999px; padding: 0.25rem 0.7rem; }
   .lg-dots { display: flex; gap: 0.4rem; margin: 1.3rem 0 0; padding: 0; list-style: none; }
   .lg-dots li { width: 0.8rem; height: 0.8rem; border-radius: 50%; border: 1.5px solid var(--ink); background: #fff; }
-  .lg-dots li.ok { background: #1DB954; } .lg-dots li.no { background: var(--red); } .lg-dots li.cur { background: var(--yellow); }
+  .lg-dots li.ok { background: #1DB954; } .lg-dots li.no { background: var(--red); } .lg-dots li.lg-at { background: var(--yellow); box-shadow: 0 0 0 3px var(--ink); border-color: var(--yellow); }
   .lg-q { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-top: 1.2rem; }
   .lg-q .btn { min-width: 8.5rem; text-align: center; }
-  .lg-fb { min-height: 3.3em; margin: 1rem 0 0; font-size: 1rem; }
+  .work-item .lg-fb { min-height: 3.3em; margin: 1.1rem 0 0; font-size: 1rem; }
   .lg-fb b { font-weight: 700; }
   .lg-end[hidden], .lg-q[hidden] { display: none; }
   .lg-end .score { font: 800 clamp(2.6rem, 6vw, 4rem)/1 var(--font); letter-spacing: -0.03em; margin: 0.3rem 0 0.6rem; }
@@ -705,7 +716,7 @@
           <li><strong>iOS, Android, web</strong>Apps and chatbots</li>
           <li><strong>MSc Applied AI</strong>OsloMet</li>
         </ul>
-        <p class="now" data-in style="--i:5" aria-live="off"><span class="pulse" aria-hidden="true"></span><b>Now:</b> building the next Dilli release, due 15 February 2027 <span class="sep" aria-hidden="true">/</span> <span><time id="osloT">--:--</time> in Oslo<span id="osloS"></span></span></p>
+        <p class="now" data-in style="--i:5" aria-live="off"><span class="pulse" aria-hidden="true"></span><span><b>Now:</b> building the next Dilli release, due 15 February 2027</span> <span class="now-t"><time id="osloT">--:--</time> in Oslo<span id="osloS"></span></span></p>
       </div>
       <div class="globe-wrap" data-in style="--i:2">
         <canvas id="globe" data-cur="drag" aria-hidden="true"></canvas>
@@ -990,7 +1001,7 @@
   <section class="block" id="work-style" aria-labelledby="ws-h">
     <div class="wrap">
       <h2 id="ws-h">How I work</h2>
-      <p class="intro">What colleagues can expect from me.</p>
+      <p class="intro">What colleagues can expect from me, and how AI fits into my work.</p>
       <div class="ways">
         <article class="way">
           <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="12"/><path d="M17 9v8l5 3"/></svg>
@@ -1011,34 +1022,18 @@
           <p class="proof">I have led the engineering on Dilli since May 2025, from architecture to testing, release and maintenance.</p>
         </article>
       </div>
-    </div>
-  </section>
-
-  <section class="block" id="ai" aria-labelledby="ai-h">
-    <div class="wrap">
-      <h2 id="ai-h">How I use AI</h2>
-      <p class="intro">AI tools make me faster. They do not replace the skills behind the work.</p>
-      <p class="cites-h" style="margin:1.4rem 0 0.6rem">Tools I use</p>
-      <ul class="areas" aria-label="Tools I use"><li>Claude</li><li>Claude Code</li><li>Codex</li></ul>
-      <div class="ways">
-        <article class="way">
-          <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M17 4l3.2 9.8L30 17l-9.8 3.2L17 30l-3.2-9.8L4 17l9.8-3.2z"/></svg>
-          <h3>What I use it for</h3>
+      <div class="ai-band" id="ai" aria-labelledby="ai-h">
+        <div>
+          <span class="tag">With AI</span>
+          <h3 id="ai-h">AI makes me faster. It does not replace the skills behind the work.</h3>
+          <ul class="areas" aria-label="Tools I use"><li>Claude</li><li>Claude Code</li><li>Codex</li></ul>
           <p>Claude, Claude Code and Codex help me with drafts, boilerplate, tests, refactoring, documentation and finding my way in unfamiliar code. With Claude Code I can work with the AI directly in my terminal and codebase, so it can read the project, run commands and suggest changes that I review. Routine work goes faster, and I get more time for the hard parts.</p>
-          <p class="proof">I treat it like a quick colleague who still needs a review.</p>
-        </article>
-        <article class="way">
-          <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M7 27V8l10 8 10-8v19"/></svg>
-          <h3>What stays with me</h3>
-          <p>Architecture, design choices, security and the final decision. I need to understand what I ship and why it works.</p>
-          <p class="proof">The skills come first. The tool comes second.</p>
-        </article>
-        <article class="way">
-          <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M17 4l10 4v8c0 6-4 10-10 13C11 26 7 22 7 16V8z"/></svg>
-          <h3>How I stay in control</h3>
-          <p>I read and test everything the tool writes. I keep sensitive data out of prompts, and I check claims against the documentation.</p>
-          <p class="proof">A tool can be wrong. I'm the one who answers for the result.</p>
-        </article>
+        </div>
+        <ul class="ai-rules">
+          <li><b>What stays with me</b>Architecture, design choices, security and the final decision. I need to understand what I ship and why it works.</li>
+          <li><b>How I stay in control</b>I read and test everything the tool writes. I keep sensitive data out of prompts, and I check claims against the documentation.</li>
+          <li><b>My rule</b>The skills come first. The tool comes second. A tool can be wrong, and I'm the one who answers for the result.</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -2292,7 +2287,7 @@
     function load() {
       const c = round[i]; img.src = c.src; img.alt = 'Potato leaf photo ' + (i + 1) + ' of 5';
       badge.textContent = 'Leaf ' + (i + 1) + ' of 5'; imgBox.classList.remove('ok', 'no');
-      [...dots.children].forEach((d, k) => d.classList.toggle('cur', k === i));
+      [...dots.children].forEach((d, k) => d.classList.toggle('lg-at', k === i));
       locked = false;
     }
     function answer(a) {
@@ -2300,7 +2295,7 @@
       const c = round[i], truth = c.c === 'Healthy' ? 'Healthy' : 'Diseased', right = a === truth;
       if (right) score++;
       imgBox.classList.add(right ? 'ok' : 'no');
-      const d = dots.children[i]; d.classList.remove('cur'); d.classList.add(right ? 'ok' : 'no');
+      const d = dots.children[i]; d.classList.remove('lg-at'); d.classList.add(right ? 'ok' : 'no');
       fb.innerHTML = '';
       const b = document.createElement('b'); b.textContent = right ? 'Correct. ' : 'Not quite. ';
       fb.append(b, 'This leaf is ' + NAME[c.c] + '.');
